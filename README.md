@@ -1,4 +1,4 @@
-# enable-stream 
+# enable-stream [![Build Status](https://travis-ci.org/AGrzes/enable-stream.svg?branch=master)](https://travis-ci.org/AGrzes/enable-stream) [![Coverage Status](https://coveralls.io/repos/github/AGrzes/enable-stream/badge.svg?branch=master)](https://coveralls.io/github/AGrzes/enable-stream?branch=master)
 Utility for enabling/disabling streams in pipeline
 
 # Usage
