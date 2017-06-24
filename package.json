@@ -1,0 +1,40 @@
+{
+  "name": "enable-stream",
+  "version": "1.0.0",
+  "description": "Utility for enabling/disabling streams in pipeline",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "nyc --reporter=html --reporter=text mocha --recursive",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AGrzes/enable-stream.git"
+  },
+  "keywords": [
+    "stream"
+  ],
+  "author": "Grzegorz Abramczyk <abramczykg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AGrzes/enable-stream/issues"
+  },
+  "homepage": "https://github.com/AGrzes/enable-stream#readme",
+  "dependencies": {
+    "mississippi": "^1.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
+    "eslint": "^4.1.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.2",
+    "streamtest": "^1.2.2"
+  }
+}
