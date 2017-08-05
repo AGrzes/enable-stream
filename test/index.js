@@ -77,6 +77,13 @@ describe('enable_stream', () => {
           done(error)
         }))
       })
+
+      it('Should enable destination object stream ', (done) => {
+        StreamTest[version].fromObjects(['a']).pipe(enableStream.dst.obj(StreamTest[version].toObjects((error, objects) => {
+          expect(objects).to.be.deep.equals(['a'])
+          done(error)
+        }), true))
+      })
     })
   })
 })
