@@ -1,4 +1,5 @@
-var expect = require('chai').expect
+var chai = require('chai').use(require('chai-spies'))
+var expect = chai.expect
 var enableStream = require('../index')
 var miss = require('mississippi')
 var StreamTest = require('streamtest')
@@ -76,6 +77,41 @@ describe('enable_stream', () => {
           expect(text).to.be.equals('')
           done(error)
         }))
+      })
+
+      it('Should enable destination object stream ', (done) => {
+        StreamTest[version].fromObjects(['a']).pipe(enableStream.dst.obj(StreamTest[version].toObjects((error, objects) => {
+          expect(objects).to.be.deep.equals(['a'])
+          done(error)
+        }), true))
+      })
+
+      it('Should disable destination object stream ', (done) => {
+        var src = StreamTest[version].fromObjects(['a'])
+        var dst = StreamTest[version].toObjects(() => false)
+        dst.on = chai.spy(dst.on)
+        src.on('end', () => {
+          expect(dst.on).to.have.not.been.called()
+          done()
+        })
+        src.pipe(enableStream.dst.obj(dst, false))
+      })
+
+      it('Should enable destination stream ', (done) => {
+        StreamTest[version].fromChunks(['a']).pipe(enableStream.dst(StreamTest[version].toText((error, objects) => {
+          expect(objects).to.be.equals('a')
+          done(error)
+        }), true))
+      })
+      it('Should disable destination stream ', (done) => {
+        var src = StreamTest[version].fromChunks(['a'])
+        var dst = StreamTest[version].toText(() => false)
+        dst.on = chai.spy(dst.on)
+        src.on('end', () => {
+          expect(dst.on).to.have.not.been.called()
+          done()
+        })
+        src.pipe(enableStream.dst(dst, false))
       })
     })
   })
