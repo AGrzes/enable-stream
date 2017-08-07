@@ -1,4 +1,5 @@
-var expect = require('chai').expect
+var chai = require('chai').use(require('chai-spies'))
+var expect = chai.expect
 var enableStream = require('../index')
 var miss = require('mississippi')
 var StreamTest = require('streamtest')
@@ -83,6 +84,17 @@ describe('enable_stream', () => {
           expect(objects).to.be.deep.equals(['a'])
           done(error)
         }), true))
+      })
+
+      it('Should disable destination object stream ', (done) => {
+        var src = StreamTest[version].fromObjects(['a'])
+        var dst = StreamTest[version].toObjects(() => false)
+        dst.on = chai.spy(dst.on)
+        src.on('end', () => {
+          expect(dst.on).to.have.not.been.called()
+          done()
+        })
+        src.pipe(enableStream.dst.obj(dst, false))
       })
     })
   })
