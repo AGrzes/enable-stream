@@ -5,7 +5,7 @@ Utility for enabling/disabling streams in pipeline
 ```
 var es = require('enable-stream)
 
-es(source,sourceEnabled).pipe(es(transform,transformEnabled)).pipe(destination)
+es.src(source,sourceEnabled).pipe(es(transform,transformEnabled)).pipe(es.dst(destination,destinationEnabled))
 ```
 
 if a function creating a stream is passed to `enable-stream` then it is called only when stream is enabled. 
