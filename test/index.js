@@ -96,6 +96,13 @@ describe('enable_stream', () => {
         })
         src.pipe(enableStream.dst.obj(dst, false))
       })
+
+      it('Should enable destination stream ', (done) => {
+        StreamTest[version].fromChunks(['a']).pipe(enableStream.dst(StreamTest[version].toText((error, objects) => {
+          expect(objects).to.be.equals('a')
+          done(error)
+        }), true))
+      })
     })
   })
 })
