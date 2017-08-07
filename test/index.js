@@ -103,6 +103,16 @@ describe('enable_stream', () => {
           done(error)
         }), true))
       })
+      it('Should disable destination stream ', (done) => {
+        var src = StreamTest[version].fromChunks(['a'])
+        var dst = StreamTest[version].toText(() => false)
+        dst.on = chai.spy(dst.on)
+        src.on('end', () => {
+          expect(dst.on).to.have.not.been.called()
+          done()
+        })
+        src.pipe(enableStream.dst(dst, false))
+      })
     })
   })
 })
